@@ -6,7 +6,7 @@ import { attachCookiesToResponse } from '../../utils/attachCookiesToResponse'
 import User from '../user/user.model'
 import { createTokenUser, sign } from '../../utils/jwt.utils'
 import config from '../../configs/index.config'
-import { sendTwilioMessage } from '../../lib/twilio'
+// import { sendTwilioMessage } from '../../lib/twilio'
 import { NumGen } from '../../utils/generateCodesForUsers'
 import Token from './token.model'
 import { z } from 'zod'
@@ -110,10 +110,10 @@ export const sendPhoneVerificationOTP = async (req: Request, res: Response) => {
       expiresAt
     })
 
-    const resp = await sendTwilioMessage(
-      token.phone,
-      `Your Connection verification code is:${token.code}`
-    )
+    // const resp = await sendTwilioMessage(
+    //   token.phone,
+    //   `Your Connection verification code is:${token.code}`
+    // )
 
     return res.status(201).json({ message: 'OTP sent' })
   } catch (error) {
@@ -213,10 +213,10 @@ export const verifyEmail = async (req: Request, res: Response) => {
       expiresAt
     })
 
-    const resp = await sendTwilioMessage(
-      token.phone,
-      `Your verification code is:${token.code}`
-    )
+    // const resp = await sendTwilioMessage(
+    //   token.phone,
+    //   `Your verification code is:${token.code}`
+    // )
 
     return res.status(201).json({ message: 'OTP sent' })
   } catch (error) {
