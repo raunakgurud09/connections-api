@@ -37,7 +37,7 @@ export const myProfileHandler = async (req: Request, res: Response) => {
   const user: any = get(req, 'user')
 
   try {
-    const profile = await Profile.find({ user: user.userId }).populate('connections')
+    const profile = await Profile.findOne({ user: user.userId })
 
     if (!profile)
       return res.status(404).json({ message: "you don't have a profile" })
