@@ -13,7 +13,7 @@ export interface ProfileDocument extends Document {
 }
 
 const ProfileSchema = new Schema<ProfileDocument>({
-  user: { type: ObjectId, ref: 'Club' },
+  user: { type: ObjectId, ref: 'User' },
   name: { type: String, require: true },
   email: { type: String, require: true },
   phone: { type: String, require: true },
