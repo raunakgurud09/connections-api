@@ -9,6 +9,7 @@ export interface ProfileDocument extends Document {
   phone: string
   image: string
   about: string
+  connections: [Types.ObjectId]
   skills: [string]
 }
 
@@ -20,6 +21,7 @@ const ProfileSchema = new Schema<ProfileDocument>(
     phone: { type: String, require: true },
     image: { type: String, require: true, default: '' },
     about: { type: String },
+    connections: [{ type: ObjectId, ref: 'Profile' }],
     skills: [{ type: String }]
   },
   {

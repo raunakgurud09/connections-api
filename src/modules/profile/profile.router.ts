@@ -13,11 +13,13 @@ import {
   myProfileHandler,
   uploadProfileImage,
   uploadResume,
-  allProfile
+  allProfile,
+  addConnection,
+  removeConnection
 } from './profile.controller'
 import { uploads } from '../user/user.router'
 
-Router.route('/all-profile').get(authorizePermissions('admin'), allProfile)
+Router.route('/all-profile').get(authorizePermissions('user'), allProfile)
 
 Router.route('/:profileId').get(profileById)
 
@@ -29,6 +31,7 @@ Router.route('/')
   .put(updateProfileHandler)
   .delete(deleteProfileHandler)
 
+Router.route('/connection').post(addConnection).delete(removeConnection)
 //skills
 Router.route('/upload-resume').post(uploadResume)
 
