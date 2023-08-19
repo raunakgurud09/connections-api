@@ -9,16 +9,29 @@ import {
   createProfile,
   updateProfileHandler,
   deleteProfileHandler,
-  profileById
+  profileById,
+  myProfileHandler,
+  uploadProfileImage,
+  uploadResume,
+  allProfile
 } from './profile.controller'
+import { uploads } from '../user/user.router'
+
+Router.route('/all-profile').get(authorizePermissions('admin'), allProfile)
 
 Router.route('/:profileId').get(profileById)
 
-
 Router.use(requiresUser)
+
 Router.route('/')
   .post(createProfile)
+  .get(myProfileHandler)
   .put(updateProfileHandler)
   .delete(deleteProfileHandler)
+
+//skills
+Router.route('/upload-resume').post(uploadResume)
+
+Router.route('/upload-image').post(uploads.single('image'), uploadProfileImage)
 
 export { Router as profileRouter }

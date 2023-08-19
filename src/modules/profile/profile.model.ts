@@ -19,8 +19,8 @@ const ProfileSchema = new Schema<ProfileDocument>(
     email: { type: String, require: true },
     phone: { type: String, require: true },
     image: { type: String, require: true, default: '' },
-    about: { type: String, require: true },
-    skills: [{ type: String, require: true }]
+    about: { type: String },
+    skills: [{ type: String }]
   },
   {
     timestamps: true
