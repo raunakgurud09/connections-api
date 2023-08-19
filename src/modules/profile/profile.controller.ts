@@ -2,6 +2,7 @@ import { Request, Response } from 'express'
 import { get } from 'lodash'
 import Profile from './profile.model'
 import { Cloudinary } from '../../lib/cloudinary'
+import { UserDocument } from '../user/user.model'
 // import { TUser } from '../../types/TUser'
 
 export const createProfile = async (req: Request, res: Response) => {
@@ -19,11 +20,12 @@ export const createProfile = async (req: Request, res: Response) => {
         .status(402)
         .json({ message: 'you can only create you profile once' })
 
+
     const profile = await Profile.create({
       user: user.userId,
-      name: user?.name.firstName + user?.name.lastName,
+      name: user?.name.firstName + ' ' + user?.name.lastName,
       email: user.email,
-      phone: user.phone
+      phone: user.phoneNumber
     })
 
     return res.status(200).json({ data: profile, message: 'user created' })
@@ -40,7 +42,7 @@ export const myProfileHandler = async (req: Request, res: Response) => {
     const profile = await Profile.findOne({ user: user.userId })
 
     if (!profile)
-      return res.status(404).json({ message: "you don't have a profile" })
+      return res.status(400).json({ message: "you don't have a profile" })
 
     return res.status(200).json({ data: profile, message: 'your profile' })
   } catch (error) {
