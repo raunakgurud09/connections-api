@@ -12,15 +12,20 @@ export interface ProfileDocument extends Document {
   skills: [string]
 }
 
-const ProfileSchema = new Schema<ProfileDocument>({
-  user: { type: ObjectId, ref: 'User' },
-  name: { type: String, require: true },
-  email: { type: String, require: true },
-  phone: { type: String, require: true },
-  image: { type: String, require: true, default: '' },
-  about: { type: String, require: true },
-  skills: [{ type: String, require: true }]
-})
+const ProfileSchema = new Schema<ProfileDocument>(
+  {
+    user: { type: ObjectId, ref: 'User' },
+    name: { type: String, require: true },
+    email: { type: String, require: true },
+    phone: { type: String, require: true },
+    image: { type: String, require: true, default: '' },
+    about: { type: String, require: true },
+    skills: [{ type: String, require: true }]
+  },
+  {
+    timestamps: true
+  }
+)
 
 const Profile = model<ProfileDocument>('Profile', ProfileSchema)
 
